@@ -1,7 +1,13 @@
 import streamlit as st
 import os
 from openai import OpenAI
+import geocoder
 
+def get_location():
+    g = geocoder.ip('me')
+    return g.city, g.country
+
+city, country = get_location()
 
 client = OpenAI(
     api_key='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',
