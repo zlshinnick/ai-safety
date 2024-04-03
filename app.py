@@ -2,6 +2,8 @@ import streamlit as st
 from openai import OpenAI
 import geocoder
 import requests
+from prompts import get_constitution_prompt
+
 API_KEY = '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'
 
 def get_location(manual_location=None):
@@ -41,16 +43,7 @@ def generate_constitution(client, location):
         "messages": [
             {
                 "role": "system",
-                "content": "Generate a constitution for the user's country based on the provided template, ensuring that the outputs do not break any laws in that country."
-            },
-            {
-                "role": "user",
-                "content": f"User location: {location}"
-            },
-            {
-                "role": "user",
-                "content": "Template for constitution:\n1. Preamble\n2. Fundamental Rights\n3. Structure of Government\n4. Judicial System\n5. Amendment Process\n\nI need a constitution for my country that follows this template and respects all legal requirements."
-            }
+                "content": get_constitution_prompt(location)}
         ]
     }
     response = client.chat.completions.create(**request_data)
