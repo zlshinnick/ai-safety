@@ -2,9 +2,12 @@ import streamlit as st
 from openai import OpenAI
 import geocoder
 
-def get_location():
-    g = geocoder.ip('me')
-    return g.city, g.country
+def get_location(manual_location=None):
+    if manual_location:
+        return manual_location.split(', ')
+    else:
+        g = geocoder.ip('me')
+        return g.city, g.country
 
 def generate_constitution(client, location):
     request_data = {
@@ -54,13 +57,19 @@ def check_violations(client, constitution, user_output):
 
 client = OpenAI(api_key='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')
 
-city, country = get_location()
+manual_location = st.text_input('Enter a manual location (City, Country) for testing:', '')
+change_location = st.button('Change Location')
+
+if change_location:
+    city, country = get_location(manual_location)
+else:
+    city, country = get_location()
 
 constitution = generate_constitution(client, f"{city}, {country}")
 
 prompt = st.text_input('Enter your prompt:', '')
 submit = st.button('Submit')
-
+st.write(city, country)
 if submit:
     chat_completion = client.chat.completions.create(
         messages=[
