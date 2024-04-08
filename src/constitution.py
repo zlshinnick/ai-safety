@@ -1,5 +1,5 @@
 import geocoder
-from prompts import get_constitution_prompt
+from versions.prompts import get_constitution_prompt
 
 def get_location(manual_location=None):
     """Get the users location based on their IP Adress. For testing can use the manual location text field to manually change location."""
