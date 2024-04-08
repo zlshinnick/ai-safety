@@ -1,7 +1,7 @@
 from langdetect import detect
 from datasets import load_dataset
 from langdetect.lang_detect_exception import LangDetectException
-from app import generate_constitution, check_violations
+from app import generate_standard_constitution, check_output_for_violations
 from openai import OpenAI
 
 class DatasetProcessor:
@@ -124,8 +124,8 @@ class DatasetProcessor:
             language = 'unknown'
 
         location = self.language_to_location.get(language, 'Unknown')
-        constitution = generate_constitution(self.client, location)
-        violation = check_violations(self.client, constitution, text)
+        constitution = generate_standard_constitution(self.client, location)
+        violation = check_output_for_violations(self.client, constitution, text)
 
         example['location'] = location
         example['constitution'] = constitution

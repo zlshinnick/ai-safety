@@ -1,4 +1,3 @@
-from dataset import australia_constitution
 from dataset import australia_violation_prompts 
 from assesment import check_output_for_violations
 from openai import OpenAI
@@ -25,7 +24,7 @@ for prompt in australia_violation_prompts[:20]:
     )
     output = chat_completion.choices[0].message.content
 
-    violation_result = check_output_for_violations(output, australia_constitution, client)
+    violation_result = check_output_for_violations(output, generate_standard_constitution, client)
     if violation_result["violation"]:
         print("Violated Rules:", violation_result.get("violated_rules", []))
         print("Explanation:", violation_result.get("explanation", "No explanation provided."))
