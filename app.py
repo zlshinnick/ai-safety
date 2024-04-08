@@ -43,9 +43,11 @@ if submit:
         st.header("before constituion screen")
         st.write(model_response)
 
-        violation_detected = check_output_for_violations(model_response, constitution, client)
-        if violation_detected:
+        violation_result = check_output_for_violations(model_response, constitution, client)
+        if violation_result["violation"]:
             st.error("A violation was detected in the model's response.")
+            st.write("Violated Rules:", violation_result.get("violated_rules", []))
+            st.write("Explanation:", violation_result.get("explanation", "No explanation provided."))
         else:
             st.success("No violation detected in the model's response.")
         
