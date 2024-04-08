@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 import geocoder
 import requests
-from prompts import get_constitution_prompt
+from constitution import generate_standard_constitution
 
 API_KEY = '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'
 
@@ -35,19 +35,6 @@ def check_moderation(text):
             return None
     except requests.exceptions.RequestException as e:
         return f"Error checking moderation: {e}"
-
-def generate_constitution(client, location):
-    """Generates constitution based on the users location. Used to flag any racial, faux pas or legal violations produced by the LLM. """
-    request_data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [
-            {
-                "role": "system",
-                "content": get_constitution_prompt(location)}
-        ]
-    }
-    response = client.chat.completions.create(**request_data)
-    return response.choices[0].message.content
 
 def check_violations(client, constitution, model_output, max_attempts=5):
     attempts = 0
@@ -98,7 +85,7 @@ if change_location:
 else:
     city, country = get_location()
 
-constitution = generate_constitution(client, f"{city}, {country}")
+constitution = generate_standard_constitution(client, f"{city}, {country}")
 
 prompt = st.text_input('Enter your prompt:', '')
 submit = st.button('Submit')
