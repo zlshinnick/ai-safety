@@ -1,21 +1,11 @@
 import streamlit as st
 from openai import OpenAI
-import geocoder
 from constitution import generate_standard_constitution
 from improvement import recursive_improve
 from assesment import check_openai_moderation
 
-
 API_KEY = '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'
 
-def get_location(manual_location=None):
-    """Get the users location based on their IP Adress. For testing can use the manual location text field to manually change location."""
-    if manual_location:
-        return manual_location.split(', ')
-    else:
-        g = geocoder.ip('me')
-        return g.city, g.country
-    
 client = OpenAI(api_key=API_KEY)
 
 manual_location = st.text_input('Enter a manual location (City, Country) for testing:', '')
