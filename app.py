@@ -1,8 +1,8 @@
 import streamlit as st
 from openai import OpenAI
-from constitution import generate_standard_constitution
+from constitution import generate_standard_constitution, get_location
 from improvement import recursive_improve
-from assesment import check_openai_moderation
+from assesment import check_openai_moderation, check_output_for_violations
 
 API_KEY = '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'
 
@@ -42,8 +42,16 @@ if submit:
         model_response = chat_completion.choices[0].message.content
         st.header("before constituion screen")
         st.write(model_response)
-        # Screen models output against our constitution.
-        final_output = recursive_improve(client, constitution, model_response)
-        st.header("After constituion screen")
 
-        st.write(final_output)
+        violation_detected = check_output_for_violations(model_response, constitution, client)
+        if violation_detected:
+            st.error("A violation was detected in the model's response.")
+        else:
+            st.success("No violation detected in the model's response.")
+        
+        # st.header("After Constitution Screen")
+        # Screen models output against our constitution.
+        # final_output = recursive_improve(client, constitution, model_response)
+        # st.header("After constituion screen")
+
+        # st.write(final_output)
