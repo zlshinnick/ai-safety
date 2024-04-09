@@ -1,7 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 from constitution import generate_standard_constitution, get_location
-from improvement import recursive_improve
+from improvement import revise_output_to_comply_with_rules
 from assesment import check_openai_moderation, check_output_for_violations
 
 API_KEY = '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'
@@ -49,6 +49,16 @@ if submit:
             st.write("Violated Rules:", violation_result.get("violated_rules", []))
             st.write("Explanation:", violation_result.get("explanation", "No explanation provided."))
             st.write("Reccomendation, ", violation_result.get("recommendation", "No recommendation provided"))
+
+            revised_output = revise_output_to_comply_with_rules(
+                original_output=model_response,
+                explanation=violation_result.get("explanation", ""),
+                recommendation=violation_result.get("recommendation", ""),
+                client=client
+            )
+
+            st.header("after improvement has been applied")
+            st.write(revised_output)
         else:
             st.success("No violation detected in the model's response.")
         
