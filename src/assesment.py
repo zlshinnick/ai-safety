@@ -41,7 +41,7 @@ def check_output_for_violations(model_output, constitution, client):
             },
             {
                 "role": "user",
-                "content": "Check if the output complies with the constitution. If it violates any rules, return {\"violation\": true, \"violated_rules\": [\"Rule 1\", \"Rule 2\"], \"explanation\": \"Explanation of the violation\", \"recommendation\": \"Please revise the output to address the following issues: [explanation of violation]. Ensure the revised output complies with the constitution, specifically [violated_rules].\"}. If there are no violations, return {\"violation\": false}."
+                "content": "Check if the output complies with the constitution. If it violates any rules, return {\"violation\": true, \"violated_rules\": [\"Name of Rule 1\", \"Name of Rule 2\"], \"explanation\": \"Explanation of the violation\", \"recommendation\": \"Please revise the output to address the following issues: [Explanation of the violation]. Ensure the revised output complies with the constitution, specifically adhering to [Name of Rule 1, Name of Rule 2].\"}. If there are no violations, return {\"violation\": false}."
             }
         ]
     }
