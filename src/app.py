@@ -48,6 +48,7 @@ if submit:
             st.error("A violation was detected in the model's response.")
             st.write("Violated Rules:", violation_result.get("violated_rules", []))
             st.write("Explanation:", violation_result.get("explanation", "No explanation provided."))
+            st.write("Reccomendation, ", violation_result.get("recommendation", "No recommendation provided"))
         else:
             st.success("No violation detected in the model's response.")
         
