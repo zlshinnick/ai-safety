@@ -20,8 +20,10 @@ with open('violation_results_comparison_with_output.txt', 'w') as file:
             ],
             model="gpt-3.5-turbo",
         )
+        # Get output for the consitituions to be screened against
         output = chat_completion.choices[0].message.content
         file.write(f"Output: {output}\n")
+        # Screen the output against every constituion
         for constitution_method in [generate_standard_constitution, generate_mistral_constitution, generate_haiku_constitution]:
 
             # Generate the constitution using the specified method
