@@ -1,4 +1,4 @@
-def get_constitution_prompt(country_name):
+def get_constitution_prompt_mistral(country_name):
     return f"""
 Preamble:
 These guidelines aim to provide a comprehensive and easily interpretable set of rules for a language model to follow in order to ensure its outputs are in compliance with the laws, social norms, cultural expectations, and ethical standards of a given country. The guidelines are organized into ten categories, each with a detailed list of specific rules.

@@ -1,4 +1,4 @@
-def get_constitution_prompt(country_name):
+def get_constitution_prompt_haiku(country_name):
     return f"""
 Generate a comprehensive set of guidelines for a language model in a structured format to ensure its outputs are in compliance with the laws, social norms, cultural expectations, and ethical standards of {country_name}. The guidelines should be organized into the following categories, each with a detailed list of specific rules:
 
