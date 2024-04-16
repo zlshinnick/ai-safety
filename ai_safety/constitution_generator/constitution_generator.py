@@ -6,9 +6,12 @@ from .location_manager import LocationManager
 class ConstitutionGenerator:
     def __init__(self, api_key):
         self.client = OpenAI(api_key=api_key)
+        
         self.location_manager = LocationManager()
-        country = self.location_manager.get_location() 
         self.prompt_manager = ConstitutionPromptManager(country)
+
+        country = self.location_manager.get_location() 
+
 
     def generate_standard_constitution(self):
         """Generates a standard constitution for the specified location."""
