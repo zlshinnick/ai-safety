@@ -1,5 +1,5 @@
 from app import generate_constitution, check_violations
-from dataset import DatasetProcessor
+from metrics.dataset import DatasetProcessor
 
 class TestSuite:
     def __init__(self):

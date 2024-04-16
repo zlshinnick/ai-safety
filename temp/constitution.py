@@ -1,7 +1,7 @@
 import geocoder
-from prompts import get_constitution_prompt, get_custom_constitution_prompt
-from haiku_prompts import get_constitution_prompt_haiku
-from mistral_prompts import get_constitution_prompt_mistral
+from ai_safety.constitution_generator.constitution_prompt_manager import get_constitution_prompt, get_custom_constitution_prompt
+from temp.haiku_prompts import get_constitution_prompt_haiku
+from temp.mistral_prompts import get_constitution_prompt_mistral
 
 def get_location(manual_location=None):
     """Get the users location based on their IP Adress. For testing can use the manual location text field to manually change location."""

@@ -1,8 +1,8 @@
 import os
-from dataset import australia_violation_prompts
-from assesment import check_output_for_violations
+from metrics.dataset import australia_violation_prompts
+from ai_safety.conent_moderator.content_moderator import check_output_for_violations
 from openai import OpenAI
-from constitution import generate_standard_constitution, generate_mistral_constitution, generate_haiku_constitution, get_location
+from ai_safety.constitution_generator.constitution_generator import generate_standard_constitution, generate_mistral_constitution, generate_haiku_constitution, get_location
 
 API_KEY = os.getenv('AI_SAFETY_OPENAI_API_KEY')
 client = OpenAI(api_key=API_KEY)

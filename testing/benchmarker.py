@@ -1,7 +1,7 @@
 import time
 from app import generate_constitution, check_violations
 from openai import OpenAI
-from dataset import DatasetProcessor
+from metrics.dataset import DatasetProcessor
 
 processor = DatasetProcessor()
 processed_dataset = processor.process_dataset()

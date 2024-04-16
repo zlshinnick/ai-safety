@@ -1,36 +1,32 @@
 import streamlit as st
 import os
+from ai_safety.ai_safety_manager import AISafetyManager
 from openai import OpenAI
-from constitution import generate_standard_constitution, get_location
-from improvement import revise_output_to_comply_with_rules
-from assesment import check_openai_moderation, check_output_for_violations
 
 API_KEY = os.getenv('AI_SAFETY_OPENAI_API_KEY')
-
 client = OpenAI(api_key=API_KEY)
 
-manual_location = st.text_input('Enter a manual location (City, Country) for testing:', '')
-change_location = st.button('Change Location')
+ai_safety_manager = AISafetyManager(API_KEY)
 
-if change_location:
-    city, country = get_location(manual_location)
-else:
-    city, country = get_location()
+# Streamlit UI for location input
 
-constitution = generate_standard_constitution(client, f"{city}, {country}")
+# Generate constitution based on the location
+constitution = ai_safety_manager.generate_constitution()
+st.write("Constitution:" )
+st.text(constitution)
 
+# Input for user's prompt
 prompt = st.text_input('Enter your prompt:', '')
 submit = st.button('Submit')
-st.write(city, country)
 
 if submit:
-    # Check users prompt for violations from OpenAI moderation. 
-    user_prompt_moderation_warning = check_openai_moderation(prompt, API_KEY)
+    # Check user's prompt for violations from OpenAI's moderation.
+    moderation_warning = ai_safety_manager.check_content_for_moderation(prompt)
     
-    if user_prompt_moderation_warning:
-        st.error(user_prompt_moderation_warning)
+    if moderation_warning:
+        st.error(moderation_warning)
     else:
-        # Generate chat completion from user input
+        # Process the user's prompt if no moderation issues are found
         chat_completion = client.chat.completions.create(
             messages=[
                 {
@@ -41,31 +37,24 @@ if submit:
             model="gpt-3.5-turbo",
         )
         model_response = chat_completion.choices[0].message.content
-        st.header("before constituion screen")
-        st.write(model_response)
+        st.write("Response:", model_response)
 
-        violation_result = check_output_for_violations(model_response, constitution, client)
-        if violation_result["violation"]:
-            st.error("A violation was detected in the model's response.")
-            st.write("Violated Rules:", violation_result.get("violated_rules", []))
-            st.write("Explanation:", violation_result.get("explanation", "No explanation provided."))
-            st.write("Reccomendation, ", violation_result.get("recommendation", "No recommendation provided"))
+        # Check for violations against the constitution
+        violation_result = ai_safety_manager.screen_output_against_constitution(model_response)
 
-            revised_output = revise_output_to_comply_with_rules(
-                original_output=model_response,
-                explanation=violation_result.get("explanation", ""),
-                recommendation=violation_result.get("recommendation", ""),
-                client=client
-            )
+    if violation_result["violation"]:
+                st.error("A violation was detected in the model's response.")
+                st.write("Violated Rules:", violation_result.get("violated_rules", []))
+                st.write("Explanation:", violation_result.get("explanation", "No explanation provided."))
+                st.write("Reccomendation, ", violation_result.get("recommendation", "No recommendation provided"))
 
-            st.header("after improvement has been applied")
-            st.write(revised_output)
-        else:
-            st.success("No violation detected in the model's response.")
-        
-        # st.header("After Constitution Screen")
-        # Screen models output against our constitution.
-        # final_output = recursive_improve(client, constitution, model_response)
-        # st.header("After constituion screen")
+                revised_output = ai_safety_manager.revise_output(
+                    original_output=model_response,
+                    explanation=violation_result.get("explanation", ""),
+                    recommendation=violation_result.get("recommendation", ""),
+                )
 
-        # st.write(final_output)
+                st.header("after improvement has been applied")
+                st.write(revised_output)
+    else:
+        st.success("No violation detected in the model's response.")
