@@ -1,9 +1,10 @@
+import os
 from dataset import australia_violation_prompts
 from assesment import check_output_for_violations
 from openai import OpenAI
 from constitution import generate_standard_constitution, generate_mistral_constitution, generate_haiku_constitution, get_location
 
-API_KEY = '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'
+API_KEY = os.getenv('AI_SAFETY_OPENAI_API_KEY')
 client = OpenAI(api_key=API_KEY)
 
 # Get the user's location

@@ -2,7 +2,7 @@ from openai import OpenAI
 import csv
 import os
 
-API_KEY = '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'
+API_KEY = os.getenv('AI_SAFETY_OPENAI_API_KEY')
 client = OpenAI(api_key=API_KEY)
 
 def load_data():

@@ -1,10 +1,11 @@
 import streamlit as st
+import os
 from openai import OpenAI
 from constitution import generate_standard_constitution, get_location
 from improvement import revise_output_to_comply_with_rules
 from assesment import check_openai_moderation, check_output_for_violations
 
-API_KEY = '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'
+API_KEY = os.getenv('AI_SAFETY_OPENAI_API_KEY')
 
 client = OpenAI(api_key=API_KEY)
 
