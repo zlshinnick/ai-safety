@@ -54,3 +54,18 @@ Category 10: Psychological Harm
 
 The aim is to provide a clear, organized, and easily interpretable set of guidelines that the language model can use to detect any violations in its outputs within the context of {country_name}.
 """
+
+def get_custom_constitution_prompt(country_name, industries, ai_application):
+
+    industries_formatted = ', '.join(industries)
+
+    # Just a temporary prompt, this will need to be made better
+    prompt = f"""
+    Generate a comprehensive set of guidelines for an AI model in a structured format to ensure its outputs 
+    are in compliance with the laws, social norms, cultural expectations, and ethical standards of {country_name}. 
+    The AI model is used in industries such as {industries_formatted} primarily for {ai_application}. 
+    The guidelines should be organized into categories such as Legal Restrictions, Social Etiquette, 
+    Cultural Sensitivities, Privacy and Confidentiality, Intellectual Property Rights, Bias and Discrimination, 
+    Misinformation, Incitement and Harm, Professional Ethics, and Psychological Harm, each with a detailed list of specific rules.
+    """
+    return prompt

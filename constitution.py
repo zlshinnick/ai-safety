@@ -1,5 +1,5 @@
 import geocoder
-from prompts import get_constitution_prompt
+from prompts import get_constitution_prompt, get_custom_constitution_prompt
 from haiku_prompts import get_constitution_prompt_haiku
 from mistral_prompts import get_constitution_prompt_mistral
 
@@ -49,3 +49,18 @@ def generate_mistral_constitution(client, location):
     }
     response = client.chat.completions.create(**request_data)
     return response.choices[0].message.content
+
+def generate_custom_constitution(client, location, industries, ai_application):
+
+    # Request data setup for API call
+    request_data = {
+        "model": "gpt-3.5-turbo",
+        "messages": [
+            {"role": "system", "content": get_custom_constitution_prompt(location, industries, ai_application)}
+        ]
+    }
+
+    # Call the OpenAI API
+    response = client.chat.completions.create(**request_data)
+    constitution_text = response.choices[0].message.content
+    return constitution_text
