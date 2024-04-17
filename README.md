@@ -15,9 +15,8 @@
 
 
 ---
-<div align="center">
-  <img alt="AI Safety Logo" src="docs/public/banner.png" height="240"/>
-</div>
+
+![Command Banner](docs/public/banner.png)
 
 ## Getting Started
 This code is provided as a PyPi package. To install it, run the following command:
