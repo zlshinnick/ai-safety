@@ -1,5 +1,5 @@
 from ai_safety.constitution_generator.constitution_generator import ConstitutionGenerator
-from ai_safety.conent_moderator.content_moderator import ContentModerator
+from ai_safety.content_moderator.content_moderator import ContentModerator
 from ai_safety.output_reviser.output_reviser import OutputReviser
 
 class AISafetyManager:

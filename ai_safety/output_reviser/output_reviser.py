@@ -1,4 +1,8 @@
 from anthropic import Anthropic
+import os
+
+ANTHROPIC_API_KEY = os.getenv('AI_SAFETY_ANTHROPIC_API_KEY')
+client = Anthropic(api_key=ANTHROPIC_API_KEY)
 
 class OutputReviser:
     def __init__(self, api_key):
