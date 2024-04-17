@@ -1,8 +1,8 @@
-from openai import OpenAI  
+from anthropic import Anthropic
 
 class OutputReviser:
     def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
+        self.client = Anthropic(api_key=api_key)
 
     def revise_output_to_comply_with_rules(self, original_output, explanation, recommendation):
         """
@@ -18,7 +18,7 @@ class OutputReviser:
             str: The revised output that complies with the specified rules.
         """
         request_data = {
-            "model": "gpt-3.5-turbo",
+            "model": "claude-3-opus-20240229",
             "messages": [
                 {
                     "role": "system",

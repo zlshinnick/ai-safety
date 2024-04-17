@@ -2,13 +2,14 @@ import streamlit as st
 import os
 from ai_safety.ai_safety_manager import AISafetyManager
 from openai import OpenAI
+from anthropic import Anthropic
 
 API_KEY = os.getenv('AI_SAFETY_OPENAI_API_KEY')
 client = OpenAI(api_key=API_KEY)
+ANTHROPIC_API_KEY = os.getenv('AI_SAFETY_ANTROPIC_API_KEY')
+client = Anthropic(api_key=ANTHROPIC_API_KEY)
 
 ai_safety_manager = AISafetyManager(API_KEY)
-
-# Streamlit UI for location input
 
 # Generate constitution based on the location
 constitution = ai_safety_manager.generate_constitution()
