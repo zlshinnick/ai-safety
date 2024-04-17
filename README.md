@@ -82,7 +82,7 @@ revised_output = manager.revise_output(original_output, explanation, recommendat
 ## Resources
 - Docs: link (soon)
 - Examples Testing: end-to-end example tests
-- Discord: Join our community of LLM developers Discord (soon)
+- Discord: Join our community (soon)
 - Reach out to founders: Email or Schedule a chat (soon)
 
 ## License
