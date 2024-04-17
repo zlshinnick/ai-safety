@@ -1,9 +1,5 @@
 <div align="center">
   <img alt="AI Safety Logo" src="docs/public/logo.png" height="240"/>
-
-  <div align="center">
-    <!-- Add your badges here -->
-  </div>
 </div>
 
 <div align="center"> 
@@ -19,6 +15,9 @@
 
 
 ---
+<div align="center">
+  <img alt="AI Safety Logo" src="docs/public/banner.png" height="240"/>
+</div>
 
 ## Getting Started
 This code is provided as a PyPi package. To install it, run the following command:
