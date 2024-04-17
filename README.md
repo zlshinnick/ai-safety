@@ -42,13 +42,11 @@ You can generate a constitution using the `AISafetyManager` class. Here's an exa
 ```python
 from ai_safety.ai_safety_manager import AISafetyManager
 
-# Create an instance of AISafetyManager
-manager = AISafetyManager(api_key="your_api_key", industries=["industry1", "industry2"], ai_application="your_ai_application")
+# Create an instance of AISafetyManager defining your own variables
+manager = AISafetyManager(api_key="your_api_key", industries=["industry1", "industry2"], 
+ai_application="your_ai_application")
 
-# Generate a constitution
 constitution = manager.generate_constitution()
-
-# The constitution is now stored in the `constitution` variable and can be used for further processing
 ```
 **Content Moderation**:
 > The package can check if a given text violates any content moderation policies provided by the users defined rules. This can be used to ensure that the AI's output is safe and appropriate.
@@ -56,7 +54,6 @@ constitution = manager.generate_constitution()
 ```python
 from ai_safety.ai_safety_manager import AISafetyManager
 
-# Create an instance of AISafetyManager
 manager = AISafetyManager(api_key="your_api_key")
 
 # Check if a given text violates any OpenAI content moderation policies
@@ -75,22 +72,13 @@ You can revise the output using the `AISafetyManager` class. Here's an example:
 ```python
 from ai_safety.ai_safety_manager import AISafetyManager
 
-# Create an instance of AISafetyManager
 manager = AISafetyManager(api_key="your_api_key")
 
-# Assume `original_output` is the output that violates the constitution
 original_output = "your_original_output"
-
-# Assume `explanation` is the explanation of the violation
 explanation = "your_explanation"
-
-# Assume `recommendation` is the recommendation for revision
 recommendation = "your_recommendation"
 
-# Revise the output
 revised_output = manager.revise_output(original_output, explanation, recommendation)
-
-# The revised output is now stored in the `revised_output` variable and can be used for further processing
 ```
 
 ## Resources
