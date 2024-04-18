@@ -7,7 +7,7 @@ class TestFactory:
     """
     def __init__(self, content_moderator, api_key):
         self.content_moderator = content_moderator
-        self.api_key = api_key 
+        self.api_key = api_key
         self.test_mapping = {
             "standard": (StandardTest, StandardTestDataGenerator),
             "location": (LocationTest, LocationTestDataGenerator),
@@ -18,6 +18,7 @@ class TestFactory:
     def get_test(self, test_type):
         if test_type in self.test_mapping:
             test_class, data_generator_class = self.test_mapping[test_type]
-            return test_class(self.content_moderator, data_generator_class(self.api_key)) 
+            data_generator = data_generator_class(api_key=self.api_key)
+            return test_class(self.content_moderator, data_generator, self.api_key)
         else:
             raise ValueError(f"Unknown test type '{test_type}'. Available types are: {list(self.test_mapping.keys())}")

@@ -1,7 +1,8 @@
 class Test:
-    def __init__(self, content_moderator, data_generator):
+    def __init__(self, content_moderator, data_generator, api_key):
         self.content_moderator = content_moderator
         self.data_generator = data_generator
+        self.api_key = api_key  
 
     def run(self):
         raise NotImplementedError("Each test must implement a run method.")
@@ -14,7 +15,6 @@ class StandardTest(Test):
 class LocationTest(Test):
     def run(self):
         data = self.data_generator.generate()
-        print(f"Running location test with data: {data}")
 
 class IndustryTest(Test):
     def run(self):
