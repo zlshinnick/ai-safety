@@ -21,7 +21,7 @@ class AISafetyManager:
         if self.industries and self.ai_application:
             return self.constitution_generator.generate_custom_constitution(self.industries, self.ai_application)
         else:
-            return self.constitution_generator.generate_standard_constitution()
+            return self.constitution_generator.generate_default_constitution()
 
     def check_content_for_moderation(self, text):
         """

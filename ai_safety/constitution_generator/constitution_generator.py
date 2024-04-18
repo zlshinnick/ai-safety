@@ -10,8 +10,8 @@ class ConstitutionGenerator:
         country = self.location_manager.get_location() 
         self.prompt_manager = ConstitutionPromptManager(country)
 
-    def generate_standard_constitution(self):
-        """Generates a standard constitution for the specified location."""
+    def generate_default_constitution(self):
+        """Generates a default constitution for the specified location."""
         try:
             prompt = self.prompt_manager.get_constitution_prompt()
             print(prompt)

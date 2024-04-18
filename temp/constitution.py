@@ -2,6 +2,7 @@ import geocoder
 from ai_safety.constitution_generator.constitution_prompt_manager import get_constitution_prompt, get_custom_constitution_prompt
 from temp.haiku_prompts import get_constitution_prompt_haiku
 from temp.mistral_prompts import get_constitution_prompt_mistral
+from temp.constitution import get_constitution_prompt_default
 
 def get_location(manual_location=None):
     """Get the users location based on their IP Adress. For testing can use the manual location text field to manually change location."""
@@ -19,6 +20,19 @@ def generate_standard_constitution(client, location):
             {
                 "role": "system",
                 "content": get_constitution_prompt(location)}
+        ]
+    }
+    response = client.chat.completions.create(**request_data)
+    return response.choices[0].message.content
+
+def generate_default_constitution(client, location):
+    """Generates default constitution based on the users location. Used to flag any racial, faux pas or legal violations produced by the LLM. """
+    request_data = {
+        "model": "gpt-3.5-turbo",
+        "messages": [
+            {
+                "role": "system",
+                "content": get_constitution_prompt_default(location)}
         ]
     }
     response = client.chat.completions.create(**request_data)
@@ -51,7 +65,6 @@ def generate_mistral_constitution(client, location):
     return response.choices[0].message.content
 
 def generate_custom_constitution(client, location, industries, ai_application):
-
     # Request data setup for API call
     request_data = {
         "model": "gpt-3.5-turbo",
