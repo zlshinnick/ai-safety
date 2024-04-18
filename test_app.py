@@ -14,7 +14,7 @@ if st.button('Run Location Test'):
     if result_details:
         st.subheader("Test Details")
         for detail in result_details:
-            st.text(f"Prompt: {detail['output']}")
+            st.text(f"Model Output: {detail['output']}")
             st.text(f"Response Compliant: {'Yes' if detail['is_compliant'] else 'No'}")
             st.write("---")
     else:
