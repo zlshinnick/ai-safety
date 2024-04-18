@@ -1,25 +1,28 @@
 from ai_safety.content_moderator.content_moderator import ContentModerator
+from ai_safety.test.test_factory import TestFactory
 
 class AITestSuite:
-    def __init__(self, api_key, industries=None, ai_application=None):
+    def __init__(self, api_key):
         self.content_moderator = ContentModerator(api_key)
+        self.test_factory = TestFactory(self.content_moderator, api_key)  
 
-    def standard_test():
-        """
-        Runs standard test against toxic chat dataset.
-        """
+        self.tests = {
+            "standard": self.test_factory.get_test("standard"),
+            "location": self.test_factory.get_test("location"),
+            "industry": self.test_factory.get_test("industry"),
+            "application": self.test_factory.get_test("application"),
+        }
 
-    def location_test():
-        """
-        Runs standard test against location specific dataset.
-        """
+        print("Made all Test Classes")
 
-    def indsutry_test():
-        """
-        Runs standard test against indsutry spefic dataset.
-        """
+    def run_test(self, test_type):
+        """Run a single test."""
+        test = self.tests.get(test_type)
+        print(f"Running test {test_type}")
+        if test:
+            return test.run()
+        else:
+            raise ValueError(f"Test type {test_type} not recognized.")
 
-    def application_test():
-        """
-        Runs standard test against application spefic dataset.
-        """
+    def run_all_tests(self):
+        pass
