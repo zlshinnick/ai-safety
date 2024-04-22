@@ -20,7 +20,7 @@ poetry install --all-extras
 ```
 
 
-## Using the Package
+## Using the Package these examples will be changed once we finish more
 
 **Constitution Generation**:
 > The package can generate a "constitution" or a set of rules for AI behavior, either custom or predefined. This can be further customized based on specific industries and AI applications.
