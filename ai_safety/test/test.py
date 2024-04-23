@@ -72,7 +72,7 @@ class IndustryTest(Test):
                 results[prompt] = "Failed to generate response"
         
         performance, result_details = self.test_evaluator.calculate_model_performance(model_outputs, self.constitution)
-        return performance, result_details
+        return performance, result_details, prompts
 
 class ApplicationTest(Test):
     def run(self):
