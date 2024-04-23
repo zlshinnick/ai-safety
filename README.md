@@ -13,7 +13,6 @@
 **An open-source toolkit designed to integrate safety measures into AI systems.**
 > Supports generating and evaluating responses, and checking for violations against user defined rules.
 
-
 ---
 
 ![Command Banner](docs/public/banner.png)
