@@ -15,7 +15,7 @@ constitution = ai_safety_manager.generate_constitution()
 
 # Title for prompt input
 st.markdown(
-    "<h2 style='color: white; font-family: \"DM Mono\", monospace;'>Enter prompt:</h2>",
+    "<h3 style='color: white; font-family: \"DM Mono\", monospace;'>Enter prompt:</h3>",
     unsafe_allow_html=True
 )
 prompt = st.text_input('', '')
@@ -55,7 +55,7 @@ if submit:
                 "<p style='color: white; font-family: \"DM Mono\", monospace; font-weight: bold;'>Violated Rules:</p>",
                 unsafe_allow_html=True
             )
-            st.write("Violated Rules:", violation_result.get("violated_rules", []))
+            st.write("Violated Rules:", violation_result.get([]))
             st.markdown(
                 "<p style='color: white; font-family: \"DM Mono\", monospace; font-weight: bold;'>Explanation:</p>",
                 unsafe_allow_html=True
@@ -84,6 +84,7 @@ if submit:
                 f"<p style='color: white; font-family: \"DM Mono\", monospace; font-weight: bold;'>After improvement:</p>",
                 unsafe_allow_html=True
             )
+
             st.markdown(
                 f"<p style='color: white; font-family: \"DM Mono\", monospace;'>{revised_output}</p>",
                 unsafe_allow_html=True
