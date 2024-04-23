@@ -14,7 +14,6 @@ class ConstitutionGenerator:
         """Generates a default constitution for the specified location."""
         try:
             prompt = self.prompt_manager.get_constitution_prompt()
-            print(prompt)
             request_data = {
                 "model": "gpt-3.5-turbo",
                 "messages": [{"role": "system", "content": prompt}]
@@ -29,7 +28,6 @@ class ConstitutionGenerator:
         """Generates a custom constitution tailored to specific industries and applications for specified location."""
         try:
             prompt = self.prompt_manager.get_custom_constitution_prompt(industries, ai_application)
-            print(prompt)
             request_data = {
                 "model": "gpt-3.5-turbo",
                 "messages": [{"role": "system", "content": prompt}]

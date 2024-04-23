@@ -1,13 +1,3 @@
-<div align="center">
-  <img alt="AI Safety Logo" src="docs/public/logo.png" height="240"/>
-</div>
-
-<div align="center"> 
-    <a href="https://twitter.com/our_name_here">
-        <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/our_name_here?style=flat&color=5C9BA1" height="20" width="auto">
-    </a>
-</div>
-
 # AI Safety
 
 **An open-source toolkit designed to integrate safety measures into AI systems.**
@@ -29,7 +19,7 @@ poetry install --all-extras
 ```
 
 
-## Using the Package
+## Using the Package these examples will be changed once we finish more
 
 **Constitution Generation**:
 > The package can generate a "constitution" or a set of rules for AI behavior, either custom or predefined. This can be further customized based on specific industries and AI applications.
