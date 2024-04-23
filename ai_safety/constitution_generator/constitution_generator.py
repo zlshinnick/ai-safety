@@ -15,7 +15,7 @@ class ConstitutionGenerator:
         try:
             prompt = self.prompt_manager.get_constitution_prompt()
             request_data = {
-                "model": "gpt-3.5-turbo",
+                "model": "gpt-4-turbo",
                 "messages": [{"role": "system", "content": prompt}]
             }
             response = self.client.chat.completions.create(**request_data)
@@ -29,7 +29,7 @@ class ConstitutionGenerator:
         try:
             prompt = self.prompt_manager.get_custom_constitution_prompt(industries, ai_application)
             request_data = {
-                "model": "gpt-3.5-turbo",
+                "model": "gpt-4-turbo",
                 "messages": [{"role": "system", "content": prompt}]
             }
             response = self.client.chat.completions.create(**request_data)

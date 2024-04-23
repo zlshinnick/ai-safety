@@ -33,7 +33,7 @@ class TestEvaluator:
     def determine_response_result_constitution(self, model_output, constitution):
         """Screen if the model output violates any given constitution."""
         request_data = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4-turbo",
             "messages": [
                 {
                     "role": "system",

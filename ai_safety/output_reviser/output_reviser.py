@@ -21,15 +21,23 @@ class OutputReviser:
         Returns:
             str: The revised output that complies with the specified rules.
         """
-        request_data = client.messages.create(
-            max_tokens=1024,
-            messages=[
-                {"role": "user", "content": f"Original Output:\n{original_output}\n\nExplanation of Violation:\n{explanation}\n\nRecommendation:\n{recommendation}\n\nRevised Output (complying with the rules):"},
-                {"role": "assistant", "content": "Given the original output, an explanation of a violation, and a recommendation to improve the output, generate a revised output that complies with the rules."},
-            ],
-            model="claude-3-opus-20240229",
-        )
+        request_data = {
+            "model": "gpt-4-turbo",
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "Given the original output, an explanation of a violation, and a recommendation to improve the output, generate a revised output that complies with the rules."
+                },
+                {
+                    "role": "user",
+                    "content": f"Original Output:\n{original_output}\n\nExplanation of Violation:\n{explanation}\n\nRecommendation:\n{recommendation}\n\nRevised Output (complying with the rules):"
+                },
+                {
+                    "role": "assistant",
+                    "content": "Generating a revised output that complies with the rules based on the provided information."
+                }
+            ]
+        }
 
-        #response = self.client.messages.completions.create(**request_data)
-        revised_output = request_data.content[0].text
-        return revised_output
+        response = self.client.chat.completions.create(**request_data)
+        return response.choices[0].message.content

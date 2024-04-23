@@ -30,7 +30,7 @@ class LocationTestDataGenerator(TestDataGenerator):
         """
 
         request_data = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4-turbo",
             "messages": [{"role": "system", "content": prompt}]
         }
 
