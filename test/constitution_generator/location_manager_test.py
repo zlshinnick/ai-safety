@@ -1,6 +1,5 @@
 import unittest
 from unittest.mock import patch
-import geocoder
 from ai_safety.constitution_generator.location_manager import LocationManager 
 
 class TestLocationManager(unittest.TestCase):

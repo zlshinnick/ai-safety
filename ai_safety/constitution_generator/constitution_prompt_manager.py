@@ -132,13 +132,17 @@ class ConstitutionPromptManager:
 
     def formatted_prompt(self, guidelines):
         """Formats guidelines dictionary into a structured string for display."""
-        formatted_text = f"Generate a comprehensive set of guidelines for a language model in {self.country_name}. Here are some examples of different categories and rules. Structure your output the same as the example. Make sure to include country specific guidlines and rules.:\n"
-        for category, rules in guidelines.items():
-            formatted_text += f"\nCategory {list(guidelines.keys()).index(category) + 1}: {category}\n"
-            for rule in rules:
-                formatted_text += f"    - {rule}\n"
+        formatted_text = f"Generate a comprehensive set of guidelines for a language model in {self.country_name}. Here are some examples of different categories and rules. Structure your output the same as the example. Make sure to include country specific guidelines and rules.:\n"
+        for category_name, rules_dict in guidelines.items():
+            formatted_text += f"\nCategory: {category_name}\n"
+            for sub_category, rules in rules_dict.items():
+                formatted_text += f"  {sub_category}:\n"
+                for rule in rules:
+                    formatted_text += f"    - {rule}\n"
         formatted_text += "\n\nThe aim is to provide a clear, organized, and easily interpretable set of guidelines."
         return formatted_text
+
+
 
     def get_constitution_prompt(self):
         """
