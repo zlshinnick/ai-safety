@@ -1,14 +1,23 @@
 from openai import OpenAI 
 from ai_safety.constitution_generator.location_manager import LocationManager
+from datasets import load_dataset
+
 class TestDataGenerator:
     def __init__(self, api_key=None):
         self.api_key = api_key
     def generate(self):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class StandardTestDataGenerator(TestDataGenerator):
+class StandardTestDataGenerator:
     def generate(self):
-        return "Standard test data for toxic chat dataset"
+        dataset = load_dataset("lmsys/toxic-chat", 'toxicchat0124', split='train')
+        user_inputs = []
+
+        # Can change the range depeneding on how many prompts we want to test with
+        for i in range(10):
+            user_inputs.append(dataset[i]['user_input'])
+
+        return user_inputs
 
 class LocationTestDataGenerator(TestDataGenerator):
     def __init__(self, api_key=None, location_manager=None):
