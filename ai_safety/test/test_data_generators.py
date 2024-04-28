@@ -8,7 +8,10 @@ class TestDataGenerator:
     def generate(self):
         raise NotImplementedError("Subclasses must implement this method.")
 
-class StandardTestDataGenerator:
+class StandardTestDataGenerator(TestDataGenerator):
+    def __init__(self, api_key=None):
+        super().__init__(api_key)
+
     def generate(self):
         dataset = load_dataset("lmsys/toxic-chat", 'toxicchat0124', split='train')
         user_inputs = []

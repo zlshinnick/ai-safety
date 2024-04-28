@@ -8,7 +8,7 @@ test_suite = AITestSuite(API_KEY)
 st.title('AI Test Suite Interface - Location Test')
 
 if st.button('Run Location Test'):
-    performance, result_details, prompts = test_suite.run_test('industry', industry='healthcare')
+    performance, result_details = test_suite.run_test('standard')
     st.write(f"Test Performance: {performance * 100}%")
 
     if result_details:
@@ -20,5 +20,3 @@ if st.button('Run Location Test'):
     else:
         st.write("No detailed results to display.")
 
-    for prompt in prompts:
-        st.write(prompt)

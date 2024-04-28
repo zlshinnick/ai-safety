@@ -7,11 +7,10 @@ class ConstitutionGenerator:
     def __init__(self, api_key):
         self.client = OpenAI(api_key=api_key)
         self.location_manager = LocationManager()
-        country = self.location_manager.get_location() 
-        self.prompt_manager = ConstitutionPromptManager(country)
+        self.location = self.location_manager.get_location() 
+        self.prompt_manager = ConstitutionPromptManager(self.location)
 
     def generate_default_constitution(self):
-        """Generates a default constitution for the specified location."""
         try:
             prompt = self.prompt_manager.get_constitution_prompt()
             request_data = {
@@ -23,7 +22,6 @@ class ConstitutionGenerator:
         except Exception as e:
             print(f"Error generating standard constitution: {e}")
             return None
-
     def generate_custom_constitution(self, industries, ai_application):
         """Generates a custom constitution tailored to specific industries and applications for specified location."""
         try:
