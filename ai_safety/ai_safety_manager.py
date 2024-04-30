@@ -1,14 +1,16 @@
 from ai_safety.constitution_generator.constitution_generator import ConstitutionGenerator
 from ai_safety.content_moderator.content_moderator import ContentModerator
 from ai_safety.output_reviser.output_reviser import OutputReviser
+from openai import OpenAI
 
 class AISafetyManager:
     def __init__(self, api_key, industries=None, ai_application=None):
         self.api_key = api_key
+        self.client = OpenAI(api_key=api_key)
         self.industries = industries
         self.ai_application = ai_application
 
-        self.constitution_generator = ConstitutionGenerator(api_key)
+        self.constitution_generator = ConstitutionGenerator(self.client)
         self.content_moderator = ContentModerator(api_key)
         self.output_reviser = OutputReviser(api_key)
 

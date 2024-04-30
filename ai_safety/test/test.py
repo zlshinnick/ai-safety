@@ -7,14 +7,14 @@ class Test:
         self.data_generator = data_generator
         self.client = OpenAI(api_key=api_key)
         self.test_evaluator = TestEvaluator(client=self.client)
-
+        
     def run(self):
         raise NotImplementedError("Each test must implement a run method.")
 
 class StandardTest(Test):
     def __init__(self, data_generator, api_key):
         super().__init__(data_generator, api_key)  
-        self.constitution = ConstitutionGenerator(api_key).generate_default_constitution() 
+        self.constitution = ConstitutionGenerator(self.client).generate_default_constitution() 
     def run(self):
         prompts = self.data_generator.generate()
         results = {}
@@ -42,7 +42,7 @@ class StandardTest(Test):
 class LocationTest(Test):
     def __init__(self, data_generator, api_key):
         super().__init__(data_generator, api_key)  
-        self.constitution = ConstitutionGenerator(api_key).generate_default_constitution() 
+        self.constitution = ConstitutionGenerator(self.client).generate_default_constitution() 
 
     def run(self):
         prompts = self.data_generator.generate()
@@ -72,7 +72,7 @@ class LocationTest(Test):
 class IndustryTest(Test):
     def __init__(self, data_generator, api_key):
         super().__init__(data_generator, api_key)  
-        self.constitution = ConstitutionGenerator(api_key).generate_default_constitution() 
+        self.constitution = ConstitutionGenerator(self.client).generate_default_constitution() 
     def run(self):
         prompts = self.data_generator.generate()
         results = {}

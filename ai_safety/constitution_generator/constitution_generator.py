@@ -4,8 +4,8 @@ from .constitution_prompt_manager import ConstitutionPromptManager
 from .location_manager import LocationManager  
 
 class ConstitutionGenerator:
-    def __init__(self, api_key):
-        self.client = OpenAI(api_key=api_key)
+    def __init__(self, api_client):
+        self.client = api_client
         self.location_manager = LocationManager()
         self.location = self.location_manager.get_location() 
         self.prompt_manager = ConstitutionPromptManager(self.location)

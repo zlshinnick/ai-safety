@@ -1,5 +1,5 @@
 from ai_safety.test.test import StandardTest, LocationTest, IndustryTest, ApplicationTest
-from ai_safety.test.test_data_generators import StandardTestDataGenerator, LocationTestDataGenerator, IndustryTestDataGenerator, ApplicationTestDataGenerator
+from ai_safety.test.test_data_generators import StandardTestDataGenerator, LocationTestDataGenerator, IndustryTestDataGenerator
 
 class TestFactory:
     """
@@ -11,7 +11,6 @@ class TestFactory:
             "standard": (StandardTest, StandardTestDataGenerator),
             "location": (LocationTest, LocationTestDataGenerator),
             "industry": (IndustryTest, IndustryTestDataGenerator),
-            "application": (ApplicationTest, ApplicationTestDataGenerator)
         }
 
     def get_test(self, test_type, **kwargs):
