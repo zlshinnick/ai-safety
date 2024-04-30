@@ -94,9 +94,3 @@ class IndustryTestDataGenerator(TestDataGenerator):
         except Exception as e:
             print(f"Error during API call: {e}")
             return []
-
-
-class ApplicationTestDataGenerator(TestDataGenerator):
-    def generate(self):
-        return "Application-specific test data"
-
