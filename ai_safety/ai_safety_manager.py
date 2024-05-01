@@ -11,7 +11,7 @@ class AISafetyManager:
         self.ai_application = ai_application
 
         self.constitution_generator = ConstitutionGenerator(self.client)
-        self.content_moderator = ContentModerator(api_key)
+        self.content_moderator = ContentModerator(self.client)
         self.output_reviser = OutputReviser(api_key)
 
         self.constitution = self.generate_constitution()
