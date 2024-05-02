@@ -1,5 +1,5 @@
 import time
-from app import generate_constitution, check_violations
+from streamlit_app import generate_constitution, check_violations
 from openai import OpenAI
 from metrics.dataset import DatasetProcessor
 
