@@ -1,4 +1,4 @@
-from app import generate_constitution, check_violations
+from streamlit_app import generate_constitution, check_violations
 from metrics.dataset import DatasetProcessor
 
 class TestSuite:

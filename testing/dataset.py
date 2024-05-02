@@ -1,7 +1,7 @@
 from langdetect import detect
 from datasets import load_dataset
 from langdetect.lang_detect_exception import LangDetectException
-from app import generate_standard_constitution, check_output_for_violations
+from streamlit_app import generate_standard_constitution, check_output_for_violations
 from openai import OpenAI
 
 class DatasetProcessor:
