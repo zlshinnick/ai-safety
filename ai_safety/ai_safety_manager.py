@@ -17,7 +17,7 @@ class AISafetyManager:
 
         self.constitution_generator = ConstitutionGenerator(self.client)
         self.content_moderator = ContentModerator(self.client)
-        self.output_reviser = OutputReviser(self.anthropic_client)
+        self.output_reviser = OutputReviser(self.client)
 
         self.constitution = self.generate_constitution()
 
