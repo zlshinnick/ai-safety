@@ -1,8 +1,8 @@
 import json
 
 class OutputReviser:
-    def __init__(self, anthropic_client):
-        self.client = anthropic_client
+    def __init__(self, client):
+        self.client = client
 
     def revise_output_to_comply_with_rules(self, original_output, explanation, recommendation):
         """
