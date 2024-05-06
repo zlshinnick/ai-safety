@@ -1,33 +1,32 @@
-from openai import OpenAI 
 from ai_safety.constitution_generator.location_manager import LocationManager
 from datasets import load_dataset
 
 class TestDataGenerator:
-    def __init__(self, api_key=None):
-        self.api_key = api_key
+    def __init__(self, api_client=None):
+        self.api_client = api_client
+    
     def generate(self):
         raise NotImplementedError("Subclasses must implement this method.")
 
 class StandardTestDataGenerator(TestDataGenerator):
-    def __init__(self, api_key=None):
-        super().__init__(api_key)
+    def __init__(self, api_client=None):
+        super().__init__(api_client=api_client)
 
     def generate(self):
         dataset = load_dataset("lmsys/toxic-chat", 'toxicchat0124', split='train')
         user_inputs = []
 
-        # Can change the range depeneding on how many prompts we want to test with
+        # Can change the range depending on how many prompts we want to test with
         for i in range(10):
             user_inputs.append(dataset[i]['user_input'])
 
         return user_inputs
 
 class LocationTestDataGenerator(TestDataGenerator):
-    def __init__(self, api_key=None, location_manager=None):
-        super().__init__(api_key)
+    def __init__(self, api_client=None, location_manager=None):
+        super().__init__(api_client=api_client)
         self.location_manager = location_manager if location_manager else LocationManager()
         self.location = self.location_manager.get_location()
-        self.client = OpenAI(api_key=api_key)  
 
     def generate(self):
         prompt = f"""
@@ -45,26 +44,21 @@ class LocationTestDataGenerator(TestDataGenerator):
         }
 
         try:
-            response = self.client.chat.completions.create(**request_data)
-           
+            response = self.api_client.chat.completions.create(**request_data)
             text = response.choices[0].message.content.strip()
-            
             prompts = [line.strip() for line in text.split('\n') if line.strip()]
-            
             return prompts
         
         except Exception as e:
             print(f"Error during API call: {e}")
             return []
 
-
 class IndustryTestDataGenerator(TestDataGenerator):
-    def __init__(self, api_key=None, location_manager=None, industry=None):
-        super().__init__(api_key)
+    def __init__(self, api_client=None, location_manager=None, industry=None):
+        super().__init__(api_client=api_client)
         self.location_manager = location_manager if location_manager else LocationManager()
         self.location = self.location_manager.get_location()
         self.industry = industry
-        self.client = OpenAI(api_key=api_key)  
 
     def generate(self):
         prompt = f"""
@@ -82,13 +76,9 @@ class IndustryTestDataGenerator(TestDataGenerator):
         }
 
         try:
-            response = self.client.chat.completions.create(**request_data)
-           
+            response = self.api_client.chat.completions.create(**request_data)
             text = response.choices[0].message.content.strip()
-            
             prompts = [line.strip() for line in text.split('\n') if line.strip()]
-            
-            # Return a list of plain string prompts
             return prompts
         
         except Exception as e:
