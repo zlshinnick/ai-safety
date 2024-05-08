@@ -2,8 +2,8 @@ name: Update and Test Python Package
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight
-  workflow_dispatch:  # Allows manual triggering
+    - cron: '0 0 * * *'  # every day at midnight
+  workflow_dispatch: 
 
 jobs:
   update-package:
@@ -13,7 +13,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'  # Adjust this to match your project's Python version
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
@@ -39,17 +39,3 @@ jobs:
         git add -A
         git commit -m "Automated updates and tests by GitHub Actions" || echo "No changes to commit"
         git push
-
-    - name: Notify team
-      uses: dawidd6/action-send-mail@v2
-      with:
-        # Set up this action to send email notifications if necessary
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: AI Safety Package Update Report
-        # Customize your email
-        body: Build ${{ github.run_number }} of your AI Safety project has completed successfully.
-        to: your_email@example.com
-        from: AI Safety Update Notifier
