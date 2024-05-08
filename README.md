@@ -5,7 +5,7 @@
 
 ---
 
-![Command Banner](docs/public/banner.png)
+![Command Banner](docs/public/ayeeeee.png)
 
 ## Getting Started
 This code is provided as a PyPi package. To install it, run the following command:
