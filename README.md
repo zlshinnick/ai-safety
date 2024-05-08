@@ -68,14 +68,5 @@ recommendation = "your_recommendation"
 revised_output = manager.revise_output(original_output, explanation, recommendation)
 ```
 
-## Resources
-- Docs: link (soon)
-- Examples Testing: end-to-end example tests
-- Discord/Slack (idrk): Join our community (soon)
-- Reach out to founders: Email or Schedule a chat (soon)
-
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Feedback
-We welcome your feedback. Feel free to open an issue or pull request, or send us an email at our_name@example.com.
