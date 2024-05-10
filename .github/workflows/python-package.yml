@@ -1,0 +1,41 @@
+name: Update and Test Python Package
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+  workflow_dispatch: 
+
+jobs:
+  update-package:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install poetry
+        poetry install --all-extras
+
+    - name: Run unit tests
+      run: |
+        # Assuming you have a script to run tests
+        poetry run pytest
+
+    - name: Update package functionalities
+      run: |
+        # Here, add any scripts or commands that update your package's data or functionalities
+        echo "Update process for ai-safety package complete."
+
+    - name: Push changes to the repository
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'action@github.com'
+        git add -A
+        git commit -m "Automated updates and tests by GitHub Actions" || echo "No changes to commit"
+        git push
