@@ -4,6 +4,11 @@ setup(
     name='ai-safety',
     version='0.1',
     packages=find_packages(),
+    install_requires=[
+        'streamlit',
+        'openai',
+        'datasets'
+    ],
     description='Open source screening software enhancing safety in large language models',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',

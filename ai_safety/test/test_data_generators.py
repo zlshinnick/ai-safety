@@ -17,7 +17,7 @@ class StandardTestDataGenerator(TestDataGenerator):
         user_inputs = []
 
         # Can change the range depending on how many prompts we want to test with
-        for i in range(10):
+        for i in range(100):
             user_inputs.append(dataset[i]['user_input'])
 
         return user_inputs
